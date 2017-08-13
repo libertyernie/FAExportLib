@@ -8,6 +8,7 @@ Supported endpoints:
 
 * /user/{name}
 * /user/{name}/{folder}
+* /submission/{id}
 
 Dependencies:
 * Newtonsoft.Json

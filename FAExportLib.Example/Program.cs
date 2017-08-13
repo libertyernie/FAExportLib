@@ -25,9 +25,27 @@ namespace FAExportLib.Example {
             }
             Console.WriteLine("----------");
 
-            var gallery = await client.GetSubmissionsAsync(username, FAFolder.gallery);
-            foreach (var s in gallery) {
-                Console.WriteLine(s.title);
+            int page = 1;
+            int i = 0;
+            while (true) {
+                if (page > 3) break;
+                Console.WriteLine($"--PAGE {page}--");
+                var gallery = await client.GetSubmissionsAsync(username, FAFolder.gallery, page++);
+                if (gallery.Count() == 0) break;
+                foreach (var s in gallery) {
+                    Console.WriteLine(s.title);
+                    if (++i < 5) {
+                        var submission = await client.GetSubmissionAsync(s.id);
+                        Console.WriteLine("    " + submission.category);
+                        Console.WriteLine("    " + submission.species);
+                        Console.WriteLine("    " + submission.gender);
+                        Console.WriteLine("    " + submission.download);
+                        Console.WriteLine("    " + submission.rating);
+                        Console.WriteLine("----------");
+                    }
+                }
+
+                Console.WriteLine("----------");
             }
         }
     }

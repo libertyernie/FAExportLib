@@ -18,13 +18,18 @@ Public Class FAClient
         Return JsonConvert.DeserializeObject(Of FAUser)(json)
     End Function
 
-    Public Async Function GetSubmissionIdsAsync(name As String, folder As FAFolder, Optional page As Integer = 1) As Task(Of IEnumerable(Of Integer))
-        Dim json = Await RequestAsync($"https://faexport.boothale.net/user/{WebUtility.UrlEncode(name)}/{folder.ToString("g")}.json")
+    Public Async Function GetSubmissionIdsAsync(username As String, folder As FAFolder, Optional page As Integer = 1) As Task(Of IEnumerable(Of Integer))
+        Dim json = Await RequestAsync($"https://faexport.boothale.net/user/{WebUtility.UrlEncode(username)}/{folder.ToString("g")}.json?page={page}")
         Return JsonConvert.DeserializeObject(Of IEnumerable(Of Integer))(json)
     End Function
 
-    Public Async Function GetSubmissionsAsync(name As String, folder As FAFolder, Optional page As Integer = 1) As Task(Of IEnumerable(Of FASubmission))
-        Dim json = Await RequestAsync($"https://faexport.boothale.net/user/{WebUtility.UrlEncode(name)}/{folder.ToString("g")}.json?full=1")
-        Return JsonConvert.DeserializeObject(Of IEnumerable(Of FASubmission))(json)
+    Public Async Function GetSubmissionsAsync(username As String, folder As FAFolder, Optional page As Integer = 1) As Task(Of IEnumerable(Of FAFolderSubmission))
+        Dim json = Await RequestAsync($"https://faexport.boothale.net/user/{WebUtility.UrlEncode(username)}/{folder.ToString("g")}.json?full=1&page={page}")
+        Return JsonConvert.DeserializeObject(Of IEnumerable(Of FAFolderSubmission))(json)
+    End Function
+
+    Public Async Function GetSubmissionAsync(id As Integer) As Task(Of FASubmission)
+        Dim json = Await RequestAsync($"https://faexport.boothale.net/submission/{id}.json")
+        Return JsonConvert.DeserializeObject(Of FASubmission)(json)
     End Function
 End Class
