@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FAClient.vb" />
+    <Compile Include="FAFolder.vb" />
     <Compile Include="FASubmission.vb" />
     <Compile Include="FAUser.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
