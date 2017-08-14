@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FAClient.vb" />
+    <Compile Include="FAExportException.vb" />
     <Compile Include="FAFolder.vb" />
     <Compile Include="FASubmission.vb" />
     <Compile Include="FAUser.vb" />
