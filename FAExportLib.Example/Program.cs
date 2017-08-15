@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace FAExportLib.Example {
     class Program {
         static void Main(string[] args) {
-            MainAsync().GetAwaiter().GetResult();
+            PostJournalAsync().GetAwaiter().GetResult();
         }
 
         static async Task MainAsync() {
@@ -68,6 +70,24 @@ namespace FAExportLib.Example {
                 Console.ReadLine();
                 Console.WriteLine("----------");
             }
+        }
+
+        static async Task PostJournalAsync() {
+            FAUserClient client = new FAUserClient(a: "11111111-1111-1111-1111-111111111111", b: "22222222-2222-2222-2222-222222222222");
+
+            Console.Write("Enter title: ");
+            string title = Console.ReadLine();
+            Console.WriteLine("Enter body (multiple lines allowed, use END to end)");
+            StringBuilder body = new StringBuilder();
+            while (true) {
+                string line = Console.ReadLine();
+                if (line == null || line == "END") break;
+                body.AppendLine(line);
+            }
+
+            string url = await client.PostJournalAsync(title, body.ToString());
+
+            Process.Start(url);
         }
     }
 }

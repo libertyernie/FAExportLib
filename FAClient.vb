@@ -11,13 +11,15 @@ Public Class FAClient
 
     End Sub
 
+    Public Property UserAgent As String = "FAClient/0.1 (https://github.com/libertyernie/FAClient)"
+
     Protected Overridable Function GetFACookie() As String
         Return Nothing
     End Function
 
     Private Async Function FAExportRequestAsync(url As String, Optional useCookie As Boolean = True) As Task(Of String)
         Dim request = WebRequest.CreateHttp(url)
-        request.UserAgent = "FAClient/0.1 (https://github.com/libertyernie/FAClient)"
+        request.UserAgent = UserAgent
         If useCookie Then
             Dim cookie = GetFACookie()
             If cookie IsNot Nothing Then

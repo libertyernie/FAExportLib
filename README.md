@@ -9,10 +9,10 @@ Supported endpoints:
 * GET /user/{name}
 * GET /user/{name}/{folder}
 * GET /submission/{id}
+* POST /journal
 
 TODO:
 
-* POST /journal
 * Add a Windows Forms library that launches an embedded web browser to let you log in
 
 Dependencies:
