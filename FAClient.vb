@@ -78,7 +78,7 @@ Public Class FAClient
                                             Optional range As FARange = FARange.all,
                                             Optional mode As FASearchMode = FASearchMode.extended,
                                             Optional rating As FARating = FARating.general Or FARating.mature Or FARating.adult,
-                                            Optional type As FAType = FAType.art Or FAType.flash Or FAType.music Or FAType.photo Or FAType.poerty Or FAType.story) As Task(Of IEnumerable(Of Integer))
+                                            Optional type As FAType = FAType.art Or FAType.flash Or FAType.music Or FAType.photo Or FAType.poetry Or FAType.story) As Task(Of IEnumerable(Of Integer))
         Dim url = $"https://faexport.boothale.net/search.json?q={WebUtility.UrlEncode(q)}&page={page}&perpage=60&order_by={order_by}&order_direction={order_direction}&range={range}&mode={mode}&rating={rating.ToString().Replace(" ", "")}&type={type.ToString().Replace(" ", "")}"
         Dim json = Await FAExportRequestAsync(url)
         Return JsonConvert.DeserializeObject(Of IEnumerable(Of Integer))(json)

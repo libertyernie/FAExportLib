@@ -44,5 +44,5 @@ Public Enum FAType
     photo = 4
     music = 8
     story = 16
-    poerty = 32
+    poetry = 32
 End Enum
