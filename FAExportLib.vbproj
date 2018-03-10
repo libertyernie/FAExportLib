@@ -69,7 +69,7 @@
     <Compile Include="FAUserClient.vb" />
     <Compile Include="FAClient.vb" />
     <Compile Include="FAExportException.vb" />
-    <Compile Include="FAFolder.vb" />
+    <Compile Include="Enums.vb" />
     <Compile Include="FASubmission.vb" />
     <Compile Include="FAUser.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
