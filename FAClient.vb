@@ -71,17 +71,33 @@ Public Class FAClient
     ''' <summary>
     ''' Get a list of submission IDs from a search query.
     ''' </summary>
-    Public Async Function GetSearchIdsAsync(q As String,
-                                            Optional page As Integer = 1,
-                                            Optional order_by As FAOrder = FAOrder.date,
-                                            Optional order_direction As FAOrderDirection = FAOrderDirection.desc,
-                                            Optional range As FARange = FARange.all,
-                                            Optional mode As FASearchMode = FASearchMode.extended,
-                                            Optional rating As FARating = FARating.general Or FARating.mature Or FARating.adult,
-                                            Optional type As FAType = FAType.art Or FAType.flash Or FAType.music Or FAType.photo Or FAType.poetry Or FAType.story) As Task(Of IEnumerable(Of Integer))
+    Public Async Function SearchSubmissionIdsAsync(q As String,
+                                                   Optional page As Integer = 1,
+                                                   Optional order_by As FAOrder = FAOrder.date,
+                                                   Optional order_direction As FAOrderDirection = FAOrderDirection.desc,
+                                                   Optional range As FARange = FARange.all,
+                                                   Optional mode As FASearchMode = FASearchMode.extended,
+                                                   Optional rating As FARating = FARating.general Or FARating.mature Or FARating.adult,
+                                                   Optional type As FAType = FAType.art Or FAType.flash Or FAType.music Or FAType.photo Or FAType.poetry Or FAType.story) As Task(Of IEnumerable(Of Integer))
         Dim url = $"https://faexport.boothale.net/search.json?q={WebUtility.UrlEncode(q)}&page={page}&perpage=60&order_by={order_by}&order_direction={order_direction}&range={range}&mode={mode}&rating={rating.ToString().Replace(" ", "")}&type={type.ToString().Replace(" ", "")}"
         Dim json = Await FAExportRequestAsync(url)
         Return JsonConvert.DeserializeObject(Of IEnumerable(Of Integer))(json)
+    End Function
+
+    ''' <summary>
+    ''' Get a list of submission IDs from a search query.
+    ''' </summary>
+    Public Async Function SearchSubmissionsAsync(q As String,
+                                                 Optional page As Integer = 1,
+                                                 Optional order_by As FAOrder = FAOrder.date,
+                                                 Optional order_direction As FAOrderDirection = FAOrderDirection.desc,
+                                                 Optional range As FARange = FARange.all,
+                                                 Optional mode As FASearchMode = FASearchMode.extended,
+                                                 Optional rating As FARating = FARating.general Or FARating.mature Or FARating.adult,
+                                                 Optional type As FAType = FAType.art Or FAType.flash Or FAType.music Or FAType.photo Or FAType.poetry Or FAType.story) As Task(Of IEnumerable(Of FAFolderSubmission))
+        Dim url = $"https://faexport.boothale.net/search.json?q={WebUtility.UrlEncode(q)}&page={page}&perpage=60&order_by={order_by}&order_direction={order_direction}&range={range}&mode={mode}&rating={rating.ToString().Replace(" ", "")}&type={type.ToString().Replace(" ", "")}&full=1"
+        Dim json = Await FAExportRequestAsync(url)
+        Return JsonConvert.DeserializeObject(Of IEnumerable(Of FAFolderSubmission))(json)
     End Function
 
     ''' <summary>
