@@ -66,6 +66,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FAJournal.vb" />
     <Compile Include="FAUserClient.vb" />
     <Compile Include="FAClient.vb" />
     <Compile Include="FAExportException.vb" />

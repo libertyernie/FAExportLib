@@ -11,7 +11,7 @@ Public Class FAClient
 
     End Sub
 
-    Public Property UserAgent As String = "FAClient/0.1 (https://github.com/libertyernie/FAClient)"
+    Public Property UserAgent As String = "FAClient/0.2 (https://github.com/libertyernie/FAClient)"
 
     Protected Overridable Function GetFACookie() As String
         Return Nothing
@@ -107,5 +107,14 @@ Public Class FAClient
     Public Async Function GetSubmissionAsync(id As Integer) As Task(Of FASubmission)
         Dim json = Await FAExportRequestAsync($"https://faexport.boothale.net/submission/{id}.json", useCookie:=False)
         Return JsonConvert.DeserializeObject(Of FASubmission)(json)
+    End Function
+
+    ''' <summary>
+    ''' Get a list of journals posted by a user.
+    ''' </summary>
+    ''' <param name="username">A FurAffinity username</param>
+    Public Async Function GetJournalsAsync(username As String) As Task(Of IEnumerable(Of FAJournal))
+        Dim json = Await FAExportRequestAsync($"https://faexport.boothale.net/user/{username}/journals.json?full=1")
+        Return JsonConvert.DeserializeObject(Of IEnumerable(Of FAJournal))(json)
     End Function
 End Class
