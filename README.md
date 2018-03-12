@@ -8,12 +8,10 @@ Supported endpoints:
 
 * GET /user/{name}
 * GET /user/{name}/{folder}
+* GET /user/{name}/journals
+* GET /search
 * GET /submission/{id}
 * POST /journal
-
-TODO:
-
-* Add a Windows Forms library that launches an embedded web browser to let you log in
 
 Dependencies:
 * Newtonsoft.Json
